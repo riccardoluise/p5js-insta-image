@@ -5,7 +5,19 @@ let zoomAmount = 1.1;
 let zoomValueP, noiseFactorP, zoomAmountP;
 
 function setup() {
-  createCanvas(1080, 1920);
+  // Create a scrollable container for the canvas
+  let scrollContainer = createDiv();
+  scrollContainer.style('overflow-y', 'auto');
+  scrollContainer.style('height', 'calc(100vh - 70px)');
+  scrollContainer.style('padding-bottom', '70px'); // Ensure space for control bar
+  scrollContainer.style('position', 'relative');
+  
+  let canvasContainer = createDiv();
+  scrollContainer.child(canvasContainer);
+
+  // Create the canvas inside the scrollable container
+  let canvas = createCanvas(1080, 1920);
+  canvas.parent(canvasContainer);
   noLoop(); // Ensure the draw function only runs once
 
   // Create control bar
@@ -18,6 +30,7 @@ function setup() {
   controlBar.style('padding', '10px');
   controlBar.style('background', 'rgba(255, 255, 255, 0.8)');
   controlBar.style('border-radius', '10px');
+  controlBar.style('z-index', '1000');
 
   // Create buttons
   let refreshButton = createButton('Refresh');
