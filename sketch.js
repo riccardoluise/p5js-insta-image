@@ -8,36 +8,49 @@ function setup() {
   createCanvas(1080, 1920);
   noLoop(); // Ensure the draw function only runs once
 
+  // Create control bar
+  let controlBar = createDiv();
+  controlBar.style('display', 'flex');
+  controlBar.style('justify-content', 'center');
+  controlBar.style('position', 'fixed');
+  controlBar.style('bottom', '10px');
+  controlBar.style('width', '100%');
+  controlBar.style('padding', '10px');
+  controlBar.style('background', 'rgba(255, 255, 255, 0.8)');
+  controlBar.style('border-radius', '10px');
+
   // Create buttons
   let refreshButton = createButton('Refresh');
-  refreshButton.position(10, height + 10);
   refreshButton.mousePressed(generateImage);
+  controlBar.child(refreshButton);
 
   let downloadButton = createButton('Download');
-  downloadButton.position(100, height + 10);
   downloadButton.mousePressed(downloadImage);
+  controlBar.child(downloadButton);
 
   zoomInButton = createButton('Zoom In');
-  zoomInButton.position(190, height + 10);
   zoomInButton.mousePressed(zoomOut); // Corrected function
+  controlBar.child(zoomInButton);
 
   zoomOutButton = createButton('Zoom Out');
-  zoomOutButton.position(280, height + 10);
   zoomOutButton.mousePressed(zoomIn); // Corrected function
+  controlBar.child(zoomOutButton);
 
   let increaseZoomButton = createButton('Increase Zoom Amount');
-  increaseZoomButton.position(370, height + 10);
   increaseZoomButton.mousePressed(increaseZoom);
+  controlBar.child(increaseZoomButton);
 
   let decreaseZoomButton = createButton('Decrease Zoom Amount');
-  decreaseZoomButton.position(530, height + 10);
   decreaseZoomButton.mousePressed(decreaseZoom);
+  controlBar.child(decreaseZoomButton);
 
   noiseFactorP = createP(`Current noise factor: ${noiseFactor}`);
-  noiseFactorP.position(10, height + 40);
+  noiseFactorP.style('margin', '5px');
+  controlBar.child(noiseFactorP);
 
   zoomAmountP = createP(`Current zoom amount: ${zoomAmount.toFixed(2)}`);
-  zoomAmountP.position(10, height + 70);
+  zoomAmountP.style('margin', '5px');
+  controlBar.child(zoomAmountP);
 
   noiseFactor = random(0.01, 0.2);
 
