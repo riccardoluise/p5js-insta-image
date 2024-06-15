@@ -3,6 +3,8 @@ let noiseFactor;
 let zoomInButton, zoomOutButton;
 let zoomAmount = 1.1;
 let zoomValueP, noiseFactorP, zoomAmountP;
+let controlBar, toggleButton;
+let isControlBarVisible = true;
 
 function setup() {
   // Create a scrollable container for the canvas
@@ -21,39 +23,31 @@ function setup() {
   noLoop(); // Ensure the draw function only runs once
 
   // Create control bar
-  let controlBar = createDiv();
-  controlBar.style('display', 'flex');
-  controlBar.style('justify-content', 'center');
-  controlBar.style('position', 'fixed');
-  controlBar.style('bottom', '10px');
-  controlBar.style('width', '100%');
-  controlBar.style('padding', '10px');
-  controlBar.style('background', 'rgba(255, 255, 255, 0.8)');
-  controlBar.style('border-radius', '10px');
-  controlBar.style('z-index', '1000');
+  controlBar = createDiv();
+  controlBar.class('control-bar');
 
   // Create buttons
-  let refreshButton = createButton('Refresh');
+  let refreshButton = createButton('<i class="fas fa-sync-alt"></i> Refresh');
   refreshButton.mousePressed(generateImage);
   controlBar.child(refreshButton);
 
-  let downloadButton = createButton('Download');
+  let downloadButton = createButton('<i class="fas fa-download"></i> Download');
   downloadButton.mousePressed(downloadImage);
   controlBar.child(downloadButton);
 
-  zoomInButton = createButton('Zoom In');
+  zoomInButton = createButton('<i class="fas fa-search-plus"></i> Zoom In');
   zoomInButton.mousePressed(zoomOut); // Corrected function
   controlBar.child(zoomInButton);
 
-  zoomOutButton = createButton('Zoom Out');
+  zoomOutButton = createButton('<i class="fas fa-search-minus"></i> Zoom Out');
   zoomOutButton.mousePressed(zoomIn); // Corrected function
   controlBar.child(zoomOutButton);
 
-  let increaseZoomButton = createButton('Increase Zoom Amount');
+  let increaseZoomButton = createButton('<i class="fas fa-plus-circle"></i> Increase Zoom Amount');
   increaseZoomButton.mousePressed(increaseZoom);
   controlBar.child(increaseZoomButton);
 
-  let decreaseZoomButton = createButton('Decrease Zoom Amount');
+  let decreaseZoomButton = createButton('<i class="fas fa-minus-circle"></i> Decrease Zoom Amount');
   decreaseZoomButton.mousePressed(decreaseZoom);
   controlBar.child(decreaseZoomButton);
 
@@ -64,6 +58,15 @@ function setup() {
   zoomAmountP = createP(`Current zoom amount: ${zoomAmount.toFixed(2)}`);
   zoomAmountP.style('margin', '5px');
   controlBar.child(zoomAmountP);
+
+  // Add toggle button
+  toggleButton = createButton('<i class="fas fa-chevron-up"></i>');
+  toggleButton.style('position', 'fixed');
+  toggleButton.style('bottom', '90px');
+  toggleButton.style('right', '10px');
+  toggleButton.style('font-size', '24px');
+  toggleButton.style('padding', '10px');
+  toggleButton.mousePressed(toggleControlBar);
 
   noiseFactor = random(0.01, 0.2);
 
@@ -116,4 +119,15 @@ function increaseZoom() {
 function decreaseZoom() {
   zoomAmount *= 0.9; // Decrease the zoom amount
   zoomAmountP.html(`Current zoom amount: ${zoomAmount.toFixed(2)}`);
+}
+
+function toggleControlBar() {
+  if (isControlBarVisible) {
+    controlBar.hide();
+    toggleButton.html('<i class="fas fa-chevron-down"></i>');
+  } else {
+    controlBar.show();
+    toggleButton.html('<i class="fas fa-chevron-up"></i>');
+  }
+  isControlBarVisible = !isControlBarVisible;
 }

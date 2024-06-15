@@ -5,3 +5,25 @@ html, body {
 canvas {
   display: block;
 }
+button {
+  font-size: 16px;
+  padding: 10px 20px;
+  margin: 5px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+button i {
+  margin-right: 5px;
+}
+.control-bar {
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  bottom: 10px;
+  width: 100%;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 10px;
+  z-index: 1000;
+}
