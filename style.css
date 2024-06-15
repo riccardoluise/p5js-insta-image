@@ -14,16 +14,14 @@ button {
 }
 
 #toggleButton {
-  position: fixed;
-  top: 10px;
-  right: 10px;
   font-size: 24px;
   padding: 10px 20px;
-  z-index: 1001;
+  margin-left: 10px;
 }
 
 #controlBar {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   position: fixed;
   bottom: 10px;
@@ -32,4 +30,14 @@ button {
   background: rgba(255, 255, 255, 0.8);
   border-radius: 10px;
   z-index: 1000;
+  transition: transform 0.3s ease-in-out;
+}
+
+#controlBar.collapsed {
+  width: auto;
+  justify-content: flex-start;
+}
+
+#controlBar.collapsed > .toolButton {
+  display: none;
 }
