@@ -2,21 +2,27 @@ html, body {
   margin: 0;
   padding: 0;
 }
+
 canvas {
   display: block;
 }
+
 button {
-  font-size: 16px;
+  font-size: 18px;
   padding: 10px 20px;
   margin: 5px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
 }
-button i {
-  margin-right: 5px;
+
+#toggleButton {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  font-size: 24px;
+  padding: 10px 20px;
+  z-index: 1001;
 }
-.control-bar {
+
+#controlBar {
   display: flex;
   justify-content: center;
   position: fixed;
